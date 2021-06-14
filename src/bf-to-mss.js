@@ -1,7 +1,10 @@
-var bf = require("./bf.js");
-var  fs = require('fs');
+var fs = require("fs");
 
-var operators = [
+var bfchars = "+-><.,[]";
+var bftable = {};
+bfchars.split("").map(a=>bftable[a]=true);
+
+var mssOperatorList = [
     "Hey mod, can you turn up the volume?",
     "Hey mod, can you turn down the volume?",
     "Hey mod, can you give me a rank pleeeeaze?",
@@ -11,42 +14,15 @@ var operators = [
     "Hey mod, I have a new channel request!",
     "Hey mod, can you delete this channel? It's dead!"
 ];
+var mssOperators = {};
+bfchars.split("").map((a,i)=>mssOperators[a]=mssOperatorList[i]);
 
-/*var operators = [
-    "can you turn u",//+
-    "can you turn d",//-
-    "can you g",//>
-    "p",//<
-    "can you p",//.
-    "d",//,
-    "I",//[
-    "can you d"//]
-];*/
 
-var execModSupportScript = function(ms){
-    var bfcode = ms.split("Hey mod, ").slice(1).map(a=>{
-        a = a.trim();
-        var b = "-";
-        if(a[0] === "p"){
-            b = "<";
-        }else if(a[0] === "d"){
-            b = ",";
-        }else if(a[0] === "I"){
-            b = "[";
-        }else if(a[8] === "g"){
-            b = ">";
-        }else if(a[8] === "p"){
-            b = ".";
-        }else if(a[8] === "d"){
-            b = "]";
-        }else if(a[13] === "u"){
-            b = "+";
-        }
-        return b;
-    }).join("");
-    //console.log(bfcode);
-    bf(bfcode);
+var translate = function(bf){
+    var mss = bf.split("").filter(a=>(a in bftable)).map(a=>mssOperators[a]).join(" ");
+    console.log(mss);
 };
+
 
 
 var args = process.argv.slice(2);
@@ -66,7 +42,7 @@ for(var i = 0; i < args.length; i++){
 
 if("e" in flags){
     //execute directly
-    execModSupportScript(file);
+    translate(file);
 }else if(file){
     //execute from file
     fs.readFile(file, 'utf8' , (err, data) => {
@@ -74,7 +50,7 @@ if("e" in flags){
             console.error(err)
             return
         }
-        execModSupportScript(data);
+        translate(data);
     });
 }else{
     //execute from stdin
@@ -83,8 +59,6 @@ if("e" in flags){
             console.error(err)
             return
         }
-        execModSupportScript(data);
+        translate(data);
     });
 }
-
-

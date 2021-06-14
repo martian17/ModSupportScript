@@ -1,5 +1,5 @@
 var bf = require("./bf.js");
-var  fs = require('fs');
+var fs = require("fs");
 
 
 var args = process.argv.slice(2);

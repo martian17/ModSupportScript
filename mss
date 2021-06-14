@@ -1,4 +1,6 @@
-var  fs = require('fs');
+#!/usr/local/bin/node
+
+var fs = require("fs");
 
 var execBF = function(str){
     var ii = 0;
@@ -54,19 +56,79 @@ var execBF = function(str){
         }
         ii++;
     }
-    process.stdout.write("\n");
+    //process.stdout.write("\n");
 };
 
 
-module.exports = execBF;
 
-//execBF(process.argv[2]);
-/*
-fs.readFile(process.argv[2], 'utf8' , (err, data) => {
-    if (err) {
-        console.error(err)
-        return
+
+var execModSupportScript = function(ms){
+    var bfcode = ms.split("Hey mod, ").slice(1).map(a=>{
+        a = a.trim();
+        var b = "-";
+        if(a[0] === "p"){
+            b = "<";
+        }else if(a[0] === "d"){
+            b = ",";
+        }else if(a[0] === "I"){
+            b = "[";
+        }else if(a[8] === "g"){
+            b = ">";
+        }else if(a[8] === "p"){
+            b = ".";
+        }else if(a[8] === "d"){
+            b = "]";
+        }else if(a[13] === "u"){
+            b = "+";
+        }
+        return b;
+    }).join("");
+    //console.log(bfcode);
+    execBF(bfcode);
+};
+
+
+var args = process.argv.slice(2);
+
+var flags = {};
+var file = false;
+for(var i = 0; i < args.length; i++){
+    var arg = args[i].trim();
+    if(arg[0] === "-"){
+        for(var j = 0; j < arg.length; j++){
+            flags[arg[j]] = true;
+        }
+    }else{
+        file = arg;
     }
-    execBF(data);
-});*/
+}
+
+if("e" in flags){
+    //execute directly
+    execModSupportScript(file);
+}else if(file){
+    //execute from file
+    fs.readFile(file, 'utf8' , (err, data) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        execModSupportScript(data);
+    });
+}else{
+    //execute from stdin
+    fs.readFile("/dev/stdin", 'utf8' , (err, data) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        execModSupportScript(data);
+    });
+}
+
+
+
+
+
+
 
