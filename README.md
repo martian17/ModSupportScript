@@ -18,6 +18,7 @@ MSS is a glorified wrapper for a shitty brainfuck interpreter that I wrote a whi
 ### Setup
 ```bash
 $ git clone https://github.com/martian17/ModSupportScript.git
+$ cd ModSupportScript
 $ source setup.sh
 ```
 ### System setup
