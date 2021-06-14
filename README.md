@@ -38,7 +38,7 @@ $
 ```bash
 $ mss -e "Hey mod, can you please give me the invite link?"
 ```
-no option with file path: execute file
+no option with a file path: execute a .mss file
 ```bash
 $ mss hello-world-example.mss
 ```
