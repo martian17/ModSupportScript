@@ -21,7 +21,7 @@ bfchars.split("").map((a,i)=>mssOperators[a]=mssOperatorList[i]);
 
 
 var translate = function(bf){
-    var mss = bf.split("").filter(a=>(a in bftable)).map(a=>mssOperators[a]).join(" ");
+    var mss = bf.split("").filter(a=>(a in bftable)).map(a=>mssOperators[a]).join("\n");
     console.log(mss);
 };
 
