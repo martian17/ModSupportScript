@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+console.log("loading");
 var fs = require("fs");
 
 var bfchars = "+-><.,[]";
@@ -33,7 +34,7 @@ var flags = {};
 var file = false;
 for(var i = 0; i < args.length; i++){
     var arg = args[i].trim();
-    if(arg[0] === "-"){
+    if(arg[0] === "-" && arg.length < 3){
         for(var j = 0; j < arg.length; j++){
             flags[arg[j]] = true;
         }
@@ -41,6 +42,8 @@ for(var i = 0; i < args.length; i++){
         file = arg;
     }
 }
+
+console.log(flags,file);
 
 if("e" in flags){
     //execute directly
