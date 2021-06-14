@@ -22,7 +22,7 @@ $ cd ModSupportScript
 $ source setup.sh
 ```
 ### System setup
-since mss and bf-to-mss are standalone executable files, you can move them anywhere you like on your system and install them permanently.
+since `mss` and `bf-to-mss` are standalone executable files, you can move them anywhere you like on your system and install them permanently.
 ```bash
 $ sudo cp mss /usr/bin/
 $ sudo cp bf-to-mss /usr/bin/
