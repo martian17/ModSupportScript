@@ -1,5 +1,5 @@
 # ModSupportScript
-It's just a joke language somebody said didn't exist till now.
+It's just a joke language somebody said didn't exist until now.
 
 ## Syntax
 MSS is a glorified wrapper for a shitty brainfuck interpreter that I wrote a while ago. Therefore, the syntax is basically the same as brainfuck, but even more verbose. At least turing complete:)  
